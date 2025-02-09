@@ -1,102 +1,72 @@
--- Create the ScreenGui
+-- Create a new ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "Explsht"
+screenGui.Name = "EXB2v"
 screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
--- Show a notification when the GUI opens
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "Explsht",
-    Text = "ONLY HIM WILL HAVE IT",
-    Duration = 3 -- The notification will stay for 3 seconds
-})
+-- Create a frame to hold the buttons and label
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 250, 0, 550)  -- Adjust height to accommodate the label
+frame.Position = UDim2.new(0, 50, 0, 50)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Active = true  -- Enables input detection
+frame.Draggable = true  -- Makes the frame draggable
+frame.Parent = screenGui
 
--- Create the Background Frame (White)
-local backgroundFrame = Instance.new("Frame")
-backgroundFrame.Parent = screenGui
-backgroundFrame.Size = UDim2.new(0, 400, 0, 500)  -- Adjusted the height to fit buttons properly
-backgroundFrame.Position = UDim2.new(0.5, -200, 0.5, -250)  -- Center the frame
-backgroundFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)  -- White background
-backgroundFrame.BackgroundTransparency = 0  -- No transparency, solid white
-backgroundFrame.BorderSizePixel = 0  -- No border
+-- Create the label at the top
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 0, 50)  -- Width 100% and height 50
+label.Position = UDim2.new(0, 0, 0, 0)  -- Position it at the top of the frame
+label.Text = "EXB2v"
+label.TextSize = 30
+label.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text
+label.BackgroundTransparency = 1  -- Make it transparent
+label.Font = Enum.Font.SourceSansBold  -- Bold font style
+label.Parent = frame
 
--- Add UIStroke to the background frame for the stroke effect
-local backgroundStroke = Instance.new("UIStroke")
-backgroundStroke.Parent = backgroundFrame
-backgroundStroke.Thickness = 2  -- Set the stroke thickness
-backgroundStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-backgroundStroke.Color = Color3.fromRGB(0, 0, 0)  -- Stroke color (black)
-
--- Create the Title Label
-local title = Instance.new("TextLabel")
-title.Parent = backgroundFrame  -- Parent the title to the background frame
-title.Size = UDim2.new(0, 400, 0, 50)
-title.Position = UDim2.new(0, 0, 0, 10)  -- Adjusted position so it doesn't collide with buttons
-title.Text = "Explshts"
-title.TextSize = 24
-title.TextColor3 = Color3.fromRGB(0, 0, 0)  -- Black text color
-title.BackgroundTransparency = 1
-title.TextScaled = true
-
--- Add UIStroke to the title for the stroke effect
-local titleStroke = Instance.new("UIStroke")
-titleStroke.Parent = title
-titleStroke.Thickness = 2  -- Set the stroke thickness
-titleStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-titleStroke.Color = Color3.fromRGB(0, 0, 0)  -- Stroke color (black)
-
--- Function to create buttons
-local function createButton(text, position, parent)
+-- Function to create buttons with Button 1 and Button 2 functionality
+local function createButton(index, position)
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(0, 200, 0, 40)  -- Reduced the height of buttons to fit better
-    button.Position = position
-    button.Text = text
-    button.TextSize = 18
-    button.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text color
-    button.BackgroundColor3 = Color3.fromRGB(0, 0, 255)  -- Blue button
-    button.Parent = parent
-    
-    -- Add UIStroke to the button for the stroke effect
-    local buttonStroke = Instance.new("UIStroke")
-    buttonStroke.Parent = button
-    buttonStroke.Thickness = 2  -- Set the stroke thickness
-    buttonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    buttonStroke.Color = Color3.fromRGB(0, 0, 0)  -- Stroke color (black)
+    button.Size = UDim2.new(1, -20, 0, 50)  -- Set button size
+    button.Position = UDim2.new(0, 10, 0, position)
+    button.Text = "Button " .. index
+    button.BackgroundColor3 = Color3.fromRGB(100, 100, 255)  -- Button color
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)  -- Button text color
+    button.Parent = frame
 
-    -- Button click event
+    -- Button functionality (with Button 1 and Button 2 actions)
     button.MouseButton1Click:Connect(function()
-        print(text .. " Button Clicked!")
+        print("Button " .. index .. " clicked!")
 
         -- Button 1 functionality
-        if text == "Button 1" then
-            -- Put the logic for Button 1 here
+        if index == 1 then
+            -- Button 1 action (you can replace this with your own action)
             loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+            print("Button 1 loaded script!")
+
         -- Button 2 functionality
-        elseif text == "Button 2" then  -- Added `elseif` to prevent the error
-            -- Put the logic for Button 2 here
+        elseif index == 2 then
+            -- Button 2 action (you can replace this with your own action)
             loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmasigmaboy503/testingtesting503/refs/heads/main/Test"))()
-            print("Button 2 Clicked!")
-            -- Replace this with whatever you want Button 2 to do
+            print("Button 2 loaded script!")
         end
     end)
-    
-    return button
 end
 
--- Create 10 buttons with adjusted positions
-for i = 1, 10 do
-    local buttonPosition = UDim2.new(0.5, -100, 0, 60 + (i-1) * 45) -- Adjusted spacing to fit inside the box
-    createButton("Button " .. i, buttonPosition, backgroundFrame)
+-- Create 9 buttons with Button 1 and Button 2 logic
+for i = 1, 9 do
+    createButton(i, (i - 1) * 55 + 60)  -- Adjust starting position for buttons below the label
 end
 
--- Code for making the ScreenGui movable
+-- Function to make the frame draggable
 local dragging, dragInput, dragStart, startPos
 
 -- Function to start dragging
-title.InputBegan:Connect(function(input)
+frame.InputBegan:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = true
         dragStart = input.Position
-        startPos = screenGui.Position
+        startPos = frame.Position
         input.Consumed = true
     end
 end)
@@ -105,7 +75,7 @@ end)
 game:GetService("UserInputService").InputChanged:Connect(function(input)
     if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
         local delta = input.Position - dragStart
-        screenGui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
 end)
 
@@ -114,26 +84,4 @@ game:GetService("UserInputService").InputEnded:Connect(function(input)
     if input.UserInputType == Enum.UserInputType.MouseButton1 then
         dragging = false
     end
-end)
-
--- Create the Close (X) Button
-local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -35, 0, 10) -- Positioned at the top-right of the title, not overlapping text
-closeButton.Text = "X"
-closeButton.TextSize = 18
-closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text color for the X button
-closeButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)  -- Red button
-closeButton.Parent = backgroundFrame
-
--- Add UIStroke to the close button for the stroke effect
-local closeButtonStroke = Instance.new("UIStroke")
-closeButtonStroke.Parent = closeButton
-closeButtonStroke.Thickness = 2  -- Set the stroke thickness
-closeButtonStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-closeButtonStroke.Color = Color3.fromRGB(0, 0, 0)  -- Stroke color (black)
-
--- Close the GUI when the X button is clicked
-closeButton.MouseButton1Click:Connect(function()
-    screenGui:Destroy()  -- This will remove the entire GUI
 end)
