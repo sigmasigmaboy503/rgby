@@ -10,19 +10,11 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 3 -- The notification will stay for 3 seconds
 })
 
--- Show a second notification
-wait(3) -- Wait for the first notification to finish
-game:GetService("StarterGui"):SetCore("SendNotification", {
-    Title = "RadzSocials",
-    Text = "THIS IS BETA DONT THINK IT WORKS AUTOMATICALLY.",
-    Duration = 5 -- This notification will stay for 5 seconds
-})
-
 -- Create the Background Frame (White)
 local backgroundFrame = Instance.new("Frame")
 backgroundFrame.Parent = screenGui
-backgroundFrame.Size = UDim2.new(0, 400, 0, 600)  -- Set a fixed size for the background
-backgroundFrame.Position = UDim2.new(0.5, -200, 0.5, -300)  -- Center the frame
+backgroundFrame.Size = UDim2.new(0, 400, 0, 500)  -- Adjusted the height to fit buttons properly
+backgroundFrame.Position = UDim2.new(0.5, -200, 0.5, -250)  -- Center the frame
 backgroundFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)  -- White background
 backgroundFrame.BackgroundTransparency = 0  -- No transparency, solid white
 backgroundFrame.BorderSizePixel = 0  -- No border
@@ -55,7 +47,7 @@ titleStroke.Color = Color3.fromRGB(0, 0, 0)  -- Stroke color (black)
 -- Function to create buttons
 local function createButton(text, position, parent)
     local button = Instance.new("TextButton")
-    button.Size = UDim2.new(0, 200, 0, 50)
+    button.Size = UDim2.new(0, 200, 0, 40)  -- Reduced the height of buttons to fit better
     button.Position = position
     button.Text = text
     button.TextSize = 18
@@ -74,19 +66,25 @@ local function createButton(text, position, parent)
     button.MouseButton1Click:Connect(function()
         print(text .. " Button Clicked!")
 
-        -- Check if this is the first button (Button 1)
+        -- Button 1 functionality
         if text == "Button 1" then
-            -- Run the command immediately
+            -- Put the logic for Button 1 here
             loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        -- Button 2 functionality
+        if text == "Button 2" then
+            -- Put the logic for Button 2 here
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmasigmaboy503/testingtesting503/refs/heads/main/Test"))()
+            print("Button 2 Clicked!")
+            -- Replace this with whatever you want Button 2 to do
         end
     end)
     
     return button
 end
 
--- Create 10 buttons
+-- Create 10 buttons with adjusted positions
 for i = 1, 10 do
-    local buttonPosition = UDim2.new(0.5, -100, 0, 70 + (i-1) * 55) -- Adjusted spacing to fix collision with title
+    local buttonPosition = UDim2.new(0.5, -100, 0, 60 + (i-1) * 45) -- Adjusted spacing to fit inside the box
     createButton("Button " .. i, buttonPosition, backgroundFrame)
 end
 
@@ -121,7 +119,7 @@ end)
 -- Create the Close (X) Button
 local closeButton = Instance.new("TextButton")
 closeButton.Size = UDim2.new(0, 30, 0, 30)
-closeButton.Position = UDim2.new(1, -35, 0, 10) -- Positioned at the top-right of the title
+closeButton.Position = UDim2.new(1, -35, 0, 10) -- Positioned at the top-right of the title, not overlapping text
 closeButton.Text = "X"
 closeButton.TextSize = 18
 closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)  -- White text color for the X button
