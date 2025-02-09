@@ -10,6 +10,14 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
     Duration = 3 -- The notification will stay for 3 seconds
 })
 
+-- Show a second notification
+wait(3) -- Wait for the first notification to finish
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "RadzSocials",
+    Text = "THIS IS BETA DONT THINK IT WORKS AUTOMATICALLY.",
+    Duration = 5 -- This notification will stay for 5 seconds
+})
+
 -- Create the Background Frame (White)
 local backgroundFrame = Instance.new("Frame")
 backgroundFrame.Parent = screenGui
