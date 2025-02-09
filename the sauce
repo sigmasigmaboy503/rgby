@@ -71,7 +71,7 @@ local function createButton(text, position, parent)
             -- Put the logic for Button 1 here
             loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
         -- Button 2 functionality
-        if text == "Button 2" then
+        elseif text == "Button 2" then  -- Added `elseif` to prevent the error
             -- Put the logic for Button 2 here
             loadstring(game:HttpGet("https://raw.githubusercontent.com/sigmasigmaboy503/testingtesting503/refs/heads/main/Test"))()
             print("Button 2 Clicked!")
